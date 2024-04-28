@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 // import CustomNumeralNumericFormat from "./Price";
 
 const ProductCard = ({ product }) => {
-    const { id, title, description, sticker, price } = product;
+    const { id, title, description, appliances, price } = product;
 
     return (
         <Link to={`/products/${id}`}>
             <div className="h-120 w-72 rounded shadow-lg mx-auto border border-palette-lighter">
                 <div className="h-72 border-b-2 border-palette-lighter relative">
                     <img
-                        src={`http://localhost:9000/images/${sticker}`}
+                        src={`http://localhost:9000/images/${appliances}`}
                         className="transform duration-500 ease-in-out hover:scale-110"
                         alt={title}
                     />

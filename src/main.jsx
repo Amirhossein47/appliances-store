@@ -8,6 +8,9 @@ import { store } from "./store";
 import NotFound from "./components/NotFound";
 import MainLayout from "./components/layouts/MainLayout";
 import { ToastContainer } from "react-toastify";
+import ProductDetails from "./components/ProductDetails";
+
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter([
   {
@@ -15,14 +18,14 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <NotFound />,
   },
-  //   {
-  //     path: "/products/:productID",
-  //     element: (
-  //       <MainLayout>
-  //         <ProductDetails />
-  //       </MainLayout>
-  //     ),
-  //   },
+  {
+    path: "/products/:productID",
+    element: (
+      <MainLayout>
+        <ProductDetails />
+      </MainLayout>
+    ),
+  },
   //   {
   //     path: "/card",
   //     element: (

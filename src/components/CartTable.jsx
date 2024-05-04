@@ -4,8 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
-import { addToCart, getTotals } from "../slices/cartSlice";
+import {
+  addToCart,
+  getTotals,
+  removeFromCart,
+  decreaseCart,
+} from "../slices/cartSlice";
 import CustomNumeralNumericFormat from "./Price";
+import QtyInput from "./common/QtyInput";
 
 const CartTable = () => {
   const cart = useSelector((state) => state.cart);
@@ -19,6 +25,14 @@ const CartTable = () => {
     dispatch(addToCart(product));
   };
 
+  const handleDecreaseCart = (product) => {
+    dispatch(decreaseCart(product));
+  };
+
+  const handleRemoveFromCart = (product) => {
+    dispatch(removeFromCart(product));
+  };
+
   return (
     <div className="container mx-auto mb-20 min-h-screen">
       <Helmet>
@@ -26,7 +40,7 @@ const CartTable = () => {
       </Helmet>
       {cart.cartItems.length === 0 ? (
         <div className="text-center mt-10">
-          <p>سبد خرید شما خالی است ☺️</p>
+          <p>سبد خرید شما خالی است </p>
         </div>
       ) : (
         <>
@@ -68,18 +82,10 @@ const CartTable = () => {
                       </Link>
                     </td>
                     <td className="font-primary font-medium px-4 sm:px-6 py-4">
-                      <input
-                        type="number"
-                        inputMode="numeric"
-                        id="variant-quantity"
-                        name="variant-quantity"
-                        min="1"
-                        step="1"
-                        // value={item.cartQuantity}
-                        // onChange={(e) =>
-                        //     handleQty(e, item)
-                        // }
-                        className="text-gray-900 form-input border border-gray-300 w-16 rounded-sm focus:border-palette-light focus:ring-palette-light"
+                      <QtyInput
+                        qty={item.cartQty}
+                        decrementQty={() => handleDecreaseCart(item)}
+                        incrementQty={() => handleAddToCart(item)}
                       />
                     </td>
                     <td className="font-primary text-base font-light px-4 sm:px-6 py-4 hidden sm:table-cell">
@@ -94,9 +100,7 @@ const CartTable = () => {
                       <button
                         aria-label="delete-item"
                         className=""
-                        // onClick={() =>
-                        //     handleRemoveFromCart(item)
-                        // }
+                        onClick={() => handleRemoveFromCart(item)}
                       >
                         <i
                           className="fa fa-times w-8 h-8 text-palette-primary border border-palette-primary p-1 hover:bg-palette-lighter"

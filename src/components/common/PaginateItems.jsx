@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import ReactPaginate from "react-paginate";
-import ProductListing from './../ProductListing';
+import ProductListing from "./../ProductListing";
 
 const PaginateItems = ({ productsPerPage, products, status }) => {
   const [itemOffset, setItemOffset] = useState(0);
@@ -15,6 +15,8 @@ const PaginateItems = ({ productsPerPage, products, status }) => {
 
   const handlePageClick = (e) => {
     const newOffset = e.selected * productsPerPage;
+    
+    document.documentElement.scrollTop = 0;
 
     setItemOffset(newOffset);
   };

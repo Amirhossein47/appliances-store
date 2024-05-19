@@ -8,13 +8,13 @@ const ProductListing = ({ currentProducts, status }) => {
 
   return (
     <div className="py-12 max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8">
-      {status === "success" ? (
+      {status === "completed" ? (
         <>
           {currentProducts?.map((product, index) => (
             <ProductCard key={index} product={product} />
           ))}
         </>
-      ) : status === "pending" ? (
+      ) : status === "loading" ? (
         <p>در حال بارگذاری</p>
       ) : (
         <p>مشکلی پیش آمده...</p>

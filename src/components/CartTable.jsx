@@ -9,12 +9,14 @@ import {
   getTotals,
   removeFromCart,
   decreaseCart,
+  selectAll,
 } from "../slices/cartSlice";
 import CustomNumeralNumericFormat from "./Price";
 import QtyInput from "./common/QtyInput";
 
 const CartTable = () => {
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector(selectAll);
+  const { cartTotalAmount } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,7 +40,7 @@ const CartTable = () => {
       <Helmet>
         <title>سبد خرید | فروشگاه لوازم خانگی</title>
       </Helmet>
-      {cart.cartItems.length === 0 ? (
+      {cart.length === 0 ? (
         <div className="text-center mt-10">
           <p>سبد خرید شما خالی است </p>
         </div>
@@ -61,7 +63,7 @@ const CartTable = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-palette-lighter">
-                {cart.cartItems.map((item) => (
+                {cart.map((item) => (
                   <tr
                     key={item.id}
                     className="text-sm sm:text-base text-gray-600 text-center"
@@ -110,7 +112,7 @@ const CartTable = () => {
                     </td>
                   </tr>
                 ))}
-                {cart.cartTotalAmount === 0 ? null : (
+                {cartTotalAmount === 0 ? null : (
                   <tr className="text-center">
                     <td></td>
                     <td className="font-primary text-base text-gray-600 font-semibold uppercase px-4 sm:px-6 py-4">
@@ -118,7 +120,7 @@ const CartTable = () => {
                     </td>
                     <td className="font-primary text-lg text-palette-primary font-medium px-4 sm:px-6 py-4">
                       <CustomNumeralNumericFormat
-                        value={cart.cartTotalAmount}
+                        value={cartTotalAmount}
                         thousandSeparator=","
                         suffix={` تومان `}
                       />

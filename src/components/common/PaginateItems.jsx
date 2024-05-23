@@ -3,7 +3,14 @@ import { useState } from "react";
 import ReactPaginate from "react-paginate";
 import ProductListing from "./../ProductListing";
 
-const PaginateItems = ({ productsPerPage, products, status }) => {
+const PaginateItems = ({
+  productsPerPage,
+  products,
+  status,
+  isLoading,
+  isSuccess,
+  isError,
+}) => {
   const [itemOffset, setItemOffset] = useState(0);
 
   const endOffset = itemOffset + productsPerPage;
@@ -15,7 +22,7 @@ const PaginateItems = ({ productsPerPage, products, status }) => {
 
   const handlePageClick = (e) => {
     const newOffset = e.selected * productsPerPage;
-    
+
     document.documentElement.scrollTop = 0;
 
     setItemOffset(newOffset);
@@ -23,7 +30,12 @@ const PaginateItems = ({ productsPerPage, products, status }) => {
 
   return (
     <>
-      <ProductListing currentProducts={currentProducts} status={status} />
+      <ProductListing
+        currentProducts={currentProducts}
+        isLoading={isLoading}
+        isSuccess={isSuccess}
+        isError={isError}
+      />
       <ReactPaginate
         containerClassName="flex justify-center items-center mt-8 mb-4"
         pageClassName="block border border-solid border-lightgray w-10 h-10 flex items-center justify-center rounded-md mr-2"

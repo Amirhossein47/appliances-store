@@ -12,6 +12,10 @@ import ProductDetails from "./components/ProductDetails";
 
 import "react-toastify/dist/ReactToastify.css";
 import CartTable from "./components/CartTable";
+import Login from "./components/Login";
+import Register from './components/Register';
+
+
 
 const router = createBrowserRouter([
   {
@@ -32,6 +36,22 @@ const router = createBrowserRouter([
     element: (
       <MainLayout>
         <CartTable />
+      </MainLayout>
+    ),
+  },
+  {
+    path: "/login",
+    element: (
+      <MainLayout>
+        <Login />
+      </MainLayout>
+    ),
+  },
+  {
+    path: "/register",
+    element: (
+      <MainLayout>
+        <Register />
       </MainLayout>
     ),
   },
